@@ -1,0 +1,18 @@
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.horizontalStack {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.iconButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem; /* or whatever size you prefer */
+}
