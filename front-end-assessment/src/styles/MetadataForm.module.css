@@ -1,0 +1,93 @@
+.metadataContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 100%;
+}
+
+.topHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.topHeader > div {
+    display: flex;
+    flex-direction: column;
+    width: 49.5%;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: .5rem;
+    /*gap: 1rem;*/
+}
+
+.sidebar {
+    width: 25%;
+    min-width: 200px;
+    border-radius: 6px;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formArea {
+    flex: 1;
+    width: 100%;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.label {
+    font-weight: 550;
+    margin-bottom: .5rem;
+}
+
+.input {
+    border: 1px solid #ccc !important;
+    border-radius: 6px !important;
+    /*padding: .5rem;*/
+}
+
+.showSections {
+    width: 100%;
+}
+
+.checkbox {
+    width: 11%;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*height: 1rem;*/
+}
+
+.submitButton {
+    /*background-color: #093870 !important;*/
+    color:white !important;
+    /*width: 300px !important;*/
+    font-size: .75rem !important;
+    font-weight: normal !important;
+    padding:.5rem !important;
+    align-self: flex-end;
+    justify-self: flex-end;
+}

@@ -1,0 +1,82 @@
+.fieldContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    margin:.5rem;
+}
+
+.menuPopover {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff !important;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.fieldWrapper {
+    position:relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width:100%;
+}
+
+.fieldInput {
+    position: relative;
+    width: 100% !important;
+    margin: 0;
+}
+
+.fieldIcon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 9;
+}
+
+.icon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background-color: transparent;
+}
+
+.splitButton span {
+    height:100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+.input input::placeholder {
+    color: #093870;
+    font-style: normal;
+}
+
+.input input:hover {
+    border-radius: 10px;
+}
+
+.field {
+    width: 100%;
+}
+
+
+.radio {
+    flex-direction: row-reverse;
+}
+
+.radio span svg{
+    color: #27ae60;
+}

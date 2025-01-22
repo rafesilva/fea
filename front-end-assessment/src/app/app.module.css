@@ -1,0 +1,25 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.appHeader {
+    background-color: #efefef;
+    font-size: 1rem;
+    font-weight: 550;
+    padding:.66rem;
+    margin:unset;
+}
+
+.appMenu {
+    padding:.5rem;
+}
+
+.appFrame {
+    padding:.75rem;
+    height: 100%;
+}

@@ -1,77 +1,93 @@
-import React, { useMemo } from 'react';
-import { Button, Stack } from '@fluentui/react-components';
-import { useFieldArray, Control } from 'react-hook-form';
-import { Field } from './metadataSchema';
-import { FieldForm } from './FieldForm';
-import { Trash20Regular } from "@fluentui/react-icons";
-import { v4 as uuidv4 } from 'uuid';
-import { IconButton } from '@fluentui/react-components';
-
+import styles from "../styles/RowForm.module.css";
+import React from "react";
+import {useFieldArray, useFormContext} from "react-hook-form";
+import { FieldForm } from "./FieldForm";
+import {FieldType, MetadataFormSchema} from "../metadataSchema";
+import {v4 as uuidv4} from "uuid";
+import {Button} from "@fluentui/react-components";
+import {AddRegular} from "@fluentui/react-icons";
+import {getWidthForSize} from "../helpers/utils";
 
 interface RowFormProps {
     sectionIndex: number;
     rowIndex: number;
-    control: Control<any>;
 }
 
-export const RowForm: React.FC<RowFormProps> = ({
-                                                    sectionIndex,
-                                                    rowIndex,
-                                                    control
-                                                }) => {
-    const { fields, append, remove } = useFieldArray({
+export const RowForm: React.FC<RowFormProps> = ({ sectionIndex, rowIndex}) => {
+
+    const { control } = useFormContext<MetadataFormSchema>();
+    const { fields, append, remove, update } = useFieldArray({
         control,
         name: `sections.${sectionIndex}.rows.${rowIndex}.fields`,
     });
 
-    const availableWidth = useMemo(() => {
-        if(fields){
-            const currentWidth = fields.reduce((acc, curr) => {
-                if(curr.size === "small"){
-                    return acc + 33.33
-                }
-                if(curr.size === "medium"){
-                    return acc + 50
-                }
-                if(curr.size === "large"){
-                    return acc + 66.66
-                }
-                return acc + 100;
-            }, 0);
-            return currentWidth
-        }
-        return 0
-    }, [fields])
+    const currentWidth = fields.reduce((acc: number, field: FieldType) => acc + getWidthForSize(field.size), 0);
+    const availableWidth = 100 - currentWidth;
+
+    const canAddField = fields.length < 3 && availableWidth >= 33.33;
 
     const addField = () => {
-        append({
+        if (!canAddField) return;
+        const newField: FieldType = {
             id: uuidv4(),
             name: "",
             size: "small"
-        })
-    }
-    const handleRemove = (index: number) => {
-        remove(index)
+        }
+        append(newField)
+    };
+
+    const handleDeleteField = (fieldIndex: number) => {
+        remove(fieldIndex);
+    };
+
+    const handleChangeFieldSize = (fieldIndex: number, newSize: string) => {
+        const field = fields[fieldIndex] as FieldType;
+        const currentFieldWidth = getWidthForSize(field.size);
+        const newFieldWidth = getWidthForSize(newSize);
+        if ((availableWidth + currentFieldWidth) >= newFieldWidth) {
+            update(fieldIndex,{ ...field, size: newSize } as FieldType);
+
+        } else {
+            alert("Not enough space to change the field size.");
+        }
     };
 
     return (
-        <Stack tokens={{ childrenGap: 10 }}>
-            <Stack horizontal tokens={{childrenGap: '1rem'}}>
-                {fields?.map((field, index) => (
-                    <FieldForm
-                        key={field.id}
-                        control={control}
-                        sectionIndex={sectionIndex}
-                        rowIndex={rowIndex}
-                        fieldIndex={index}
-                        availableWidth={availableWidth}
-                    />
-                ))}
-            </Stack>
-            <Stack horizontal tokens={{childrenGap: '1rem'}}>
-                <Button onClick={addField}>Add Field</Button>
-                {fields?.length > 1 && <IconButton icon={<Trash20Regular />} onClick={() => remove()} aria-label="delete row"/>}
-            </Stack>
-        </Stack>
+        <div className={styles.stack}>
+            <div className={styles.horizontalStack}>
+                {
+                    fields.map((field:FieldType, index: number) => (
+                        <FieldForm
+                            key={field.id}
+                            fieldIndex={index}
+                            availableWidth={availableWidth}
+                            onDeleteField={handleDeleteField}
+                            onChangeField={handleChangeFieldSize}
+                            sectionIndex={sectionIndex}
+                            rowIndex={rowIndex}
+                        />
+                        )
+                    )
+                }
+
+                {
+                    canAddField && (
+                        <div
+                            className={styles.plusRegion}
+                            style={{ width: `${availableWidth}%`}}
+                        >
+                            <Button
+                                appearance={"transparent"}
+                                icon={<AddRegular />}
+                                onClick={addField}
+                                className={styles.button}
+                            >
+                                Add Column
+                            </Button>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
     );
 };

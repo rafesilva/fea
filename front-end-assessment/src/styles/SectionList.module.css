@@ -1,0 +1,54 @@
+.sectionsList {
+    width: 30%;
+    padding-right: .5rem;
+}
+
+.sectionItem {
+    display: flex;
+    height: 33px;
+    background-color: #3b2496;
+    color: #fff;
+    padding: .5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sectionItem:hover {
+    background-color: #4c2ebf;
+}
+
+.input {
+    width: 100%;
+    background-color: transparent;
+    border:none;
+    color:#ffffff;
+    outline: none;
+}
+
+.deleteButton {
+    display: flex;
+    align-items: flex-start !important;
+    cursor: pointer;
+    height: 100% !important;
+}
+
+.deleteButton:hover {
+    color: #ffcccc;
+}
+
+.deleteButtonIcon {
+    margin-top:-7px;
+    align-self: flex-start !important;
+    width:90%;
+}
+
+.button {
+    justify-content: flex-start !important;
+    width: 100% !important;
+    height: 44px !important;
+    color:#2e1a73 !important;
+    padding: .5rem !important;
+    font-weight: normal !important;
+    border: 1px dashed gray !important;
+}

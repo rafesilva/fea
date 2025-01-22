@@ -1,5 +1,55 @@
 .stack {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem;
 }
+
+.sectionsForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sectionHeader {
+    background-color: #efefef !important;
+    padding: .33rem;
+    /*height: 33px;*/
+}
+
+.sectionLabel {
+    font-weight: normal;
+    margin-bottom: 0.25rem;
+}
+
+.sectionInput {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.panel {
+    border: 1px solid #efefef;
+    /*padding: .66rem;*/
+    margin:0 !important;
+    border-radius: 4px;
+}
+
+.addRow {
+    width: 100% !important;
+    color: #093870 !important;
+    background-color: #f9f9f9 !important;
+    border: none;
+    cursor: pointer;
+    /*padding: 0.44rem !important;*/
+    font-weight: normal !important;
+    margin:.5rem;
+}
+
+.addRow:hover {
+    /*text-decoration: underline;*/
+}
+
