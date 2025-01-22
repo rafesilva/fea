@@ -21,7 +21,8 @@ export const SectionRowsForm: React.FC<SectionRowsFormProps> = ({ sectionIndex }
         name: `sections.${sectionIndex}.rows`,
     });
 
-    const addRow = () => {
+    const addRow = (e:any) => {
+        e.stopPropagation()
         const newRow: Row = {
             id: uuidv4(),
             fields: [
@@ -60,7 +61,7 @@ export const SectionForm: React.FC = () => {
         {
             sections && sections.length > 0 ? (
             sections.map((section, idx) => (
-                <Accordion collapsible multiple defaultOpenItems={[section.id]}>
+                <Accordion key={idx} collapsible multiple defaultOpenItems={[section.id]}>
                     <AccordionItem key={section.id} value={section.id}>
                         <AccordionHeader className={styles.sectionHeader} expandIconPosition={'end'}>
                             <Label className={styles.sectionLabel} style={{

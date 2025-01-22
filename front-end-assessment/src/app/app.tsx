@@ -7,12 +7,12 @@ import {Tab, TabList} from "@fluentui/react-components";
 
 const App: React.FC = () => {
 
-    const [selectedTab, setSelectedTab] = useState('tab1')
+    const [selectedTab, setSelectedTab] = useState<string>('tab1')
 
     return (
         <div className={styles.appContainer}>
             <div className={styles.appHeader}>Page Layout Builder</div>
-                <TabList className={styles.appMenu} size={"small"} defaultSelectedValue={"tab1"} selectedValue={selectedTab} onTabSelect={(_, d) =>setSelectedTab(d.value as string)}>
+                <TabList className={styles.appMenu} size={"small"} selectedValue={selectedTab} onTabSelect={(_, d) =>setSelectedTab(d.value as string)}>
                     <Tab className={styles.appMenuTab} value="tab1">Design</Tab>
                     <Tab className={styles.appMenuTab} value="tab2" disabled>Related Objects</Tab>
                 </TabList>

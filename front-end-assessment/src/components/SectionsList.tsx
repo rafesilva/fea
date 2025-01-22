@@ -7,7 +7,7 @@ import {Button, Field, Tooltip} from "@fluentui/react-components";
 import { Delete20Regular } from "@fluentui/react-icons";
 
 
-const SectionItem: React.FC<{ field:Section, index:number, onRemoveSection: ( index:number)=>void }> = ({field, index, onRemoveSection}) => {
+const SectionItem: React.FC<{ field:Section, index:number, onRemoveSection: ( index:number )=> void }> = ({field, index, onRemoveSection}) => {
 
     const [visible, setVisible] = React.useState(false);
     const [toolTipText, setToolTipText] = React.useState<string>("");
@@ -27,7 +27,6 @@ const SectionItem: React.FC<{ field:Section, index:number, onRemoveSection: ( in
     });
 
     return (
-
             <Field
                 validationMessage={
                     errors?.sections?.[index]?.label && (
@@ -70,7 +69,8 @@ export const SectionsList: React.FC = () => {
         name: "sections",
     });
 
-    const handleAddSection = () => {
+    const handleAddSection = (e: any) => {
+        e.stopPropagation()
         const newSection: Section = {
             id: uuidv4(),
             label: "",
