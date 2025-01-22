@@ -1,6 +1,6 @@
 import styles from "../styles/FieldForm.module.css";
 
-import React, { useState } from "react";
+import React, {useMemo, useState} from "react";
 import {
     Menu,
     MenuTrigger,
@@ -84,13 +84,15 @@ export const FieldForm: React.FC<FieldFormProps> = ({
         defaultValue: [],
     });
 
-    const alreadySelectedItems = rows
-        .flatMap((row) => row.fields)
-        .map((field) => field.name);
+    const alreadySelectedItems = useMemo(() => rows
+            .flatMap((row) => row.fields)
+            .map((field) => field.name)
+        , [rows])
 
-    const alreadySelectedSizes = rows
-        .flatMap((row) => row.fields)
-        .map((field) => field.size).filter((size, sIx)=>sIx === fieldIndex);
+    const alreadySelectedSizes = useMemo(() => rows
+            .flatMap((row) => row.fields)
+            .map((field) => field.size).filter((size, sIx)=>sIx === fieldIndex)
+        , [rows, fieldIndex]);
 
     const onChangeItem: MenuProps["onCheckedValueChange"] = (e, { name, checkedItems }) => {
         onChangeField(fieldIndex, checkedItems[0])
@@ -194,8 +196,10 @@ export const ControllingOpenAndClose: React.FC<ControllingOPenAndClose> = ({alre
     const [open, setOpen] = React.useState(false);
     const [filterText, setFilterText] = useState<string>("");
 
-    const handleOpenChange: ComboboxProps["onOpenChange"] = (e, data) =>
+    const handleOpenChange: ComboboxProps["onOpenChange"] = (e, data) => {
+        // setFilterText("");
         setOpen(data.open);
+    }
 
     const onOptionSelect: ComboboxProps["onOptionSelect"] = (e, data) => {
         setFilterText(data.optionText ?? "");

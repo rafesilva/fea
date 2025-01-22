@@ -1,5 +1,5 @@
 import styles from "../styles/MetadataForm.module.css";
-import React from "react";
+import React, {useMemo} from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {Dropdown, Option, Checkbox, Button, Label, Input, Field, Tooltip} from "@fluentui/react-components";
@@ -57,6 +57,15 @@ export const MetadataForm: React.FC = () => {
         console.log("Submitted Form Data:", data);
     };
 
+    const dropdownOptions = useMemo(() => {
+        return VIEW_TYPE_OPTIONS.map((opt) => (
+                <Option key={opt.key} value={opt.key}>
+                    {opt.text}
+                </Option>
+            )
+        )
+    }, []);
+
     return (
         <FormProvider {...methods}>
 
@@ -82,14 +91,8 @@ export const MetadataForm: React.FC = () => {
                                     }
                                 }}
                             >
-                                {
-                                    VIEW_TYPE_OPTIONS.map((opt) => (
-                                        <Option key={opt.key} value={opt.key}>
-                                            {opt.text}
-                                        </Option>
-                                        )
-                                    )
-                                }
+                                {dropdownOptions}
+
                             </Dropdown>
                         </Field>
                     </div>
