@@ -59,6 +59,7 @@ import type { MenuProps } from "@fluentui/react-components";
 
 
 interface ControllingOPenAndClose {
+    selectedItem: string;
     alreadySelected: string[];
     onSelectItem: (item:string) => void;
 }
@@ -170,7 +171,7 @@ export const FieldForm: React.FC<FieldFormProps> = ({
                                              menuIcon={<MoreHorizontal24Regular className={styles.icon} />}
                                              className={styles.splitButton}
                                     >
-                                    <ControllingOpenAndClose alreadySelected={alreadySelectedItems} onSelectItem={handleItemSelect} />
+                                    <ControllingOpenAndClose selectedItem={field.name} alreadySelected={alreadySelectedItems} onSelectItem={handleItemSelect} />
                                 </SplitButton>
                             )
                         }
@@ -190,19 +191,20 @@ export const FieldForm: React.FC<FieldFormProps> = ({
 };
 
 
-export const ControllingOpenAndClose: React.FC<ControllingOPenAndClose> = ({alreadySelected, onSelectItem}) => {
+export const ControllingOpenAndClose: React.FC<ControllingOPenAndClose> = ({selectedItem, alreadySelected, onSelectItem}) => {
 
     const comboId = useId("combo-default");
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState<boolean>(false);
     const [filterText, setFilterText] = useState<string>("");
 
+
     const handleOpenChange: ComboboxProps["onOpenChange"] = (e, data) => {
-        // setFilterText("");
+        e.stopPropagation()
         setOpen(data.open);
     }
 
     const onOptionSelect: ComboboxProps["onOptionSelect"] = (e, data) => {
-        setFilterText(data.optionText ?? "");
+        setFilterText("");
         onSelectItem(data.optionText ?? "")
     };
 
@@ -217,12 +219,12 @@ export const ControllingOpenAndClose: React.FC<ControllingOPenAndClose> = ({alre
                 placeholder={!open ? "+ Add Input" : ""}
                 onOpenChange={handleOpenChange}
                 onOptionSelect={onOptionSelect}
-                onChange={(ev) => setFilterText(ev.target.value)}
+                onChange={(e) => setFilterText(e.target.value)}
                 expandIcon={null}
                 appearance={"filled-darker"}
                 className={styles.fieldInput}
                 style={{ paddingLeft:filterText.trim() !== "" ? '.75rem' : 0 }}
-                value={filterText}
+                value={selectedItem || filterText}
             >
                 <OptionGroup label={"Select Field"}>
                     {
